@@ -10,9 +10,9 @@
 - Accessible via mobile phones, PCs, and other internet-enabled devices.
 - Responsive design to ensure optimal usability on any screen size.
 
-## Configuration file
-- Configuration file to store server settings like client password and loging status: `config.json`.
-- Configuration file to store settings for Tasmota devices like friendly name, password and IP adress: `settings.json`.
+## Configuration files
+- `config.json`: Configuration file to store server settings like client password and loging status.
+- `settings.json`: Configuration file to store settings for Tasmota devices like friendly name, password and IP adress.
 
 ## Secure Authentication
 - Implemented in `index.js` using passwords stored in `config.json` outside public directory.
