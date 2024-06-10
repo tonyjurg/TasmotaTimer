@@ -103,6 +103,6 @@ The `index.js` file implements the server-side logic using Node.js, handling HTT
 
 ## Logging and Debugging
 
-- The server logs client actions and errors to a log file if debug mode is enabled (by setting 'debug' to 'true' in config.json, providing traceability and aiding in debugging issues. Please be aware that there is no mechanism implemented to manage the logfiles. Logging is only to be switched on to allow for investigation or for development purposes.  
+- The server logs client actions and errors to a log file if debug mode is enabled (by setting 'debug' to 'true' in `config.json`, providing traceability and aiding in debugging issues. Please be aware that there is no mechanism implemented to manage the logfiles. Logging is only to be switched on to allow for investigation or for development purposes.  
 
 
