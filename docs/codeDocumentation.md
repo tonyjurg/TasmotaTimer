@@ -14,7 +14,7 @@ The `index.html` file is a web page designed to control the timerfunction on a T
 <details>
 <summary><b>Details on HTML Structure</b></summary>
 
-<b>Head Section:</b>
+<br><b>Head Section:</b><br>
    <ul><li>Sets up meta tags for character set and viewport settings.
    </li><li>Includes app title and links to an external CSS stylesheet for styling (`index.css`).
    </li></ul> 
@@ -28,10 +28,9 @@ The `index.html` file is a web page designed to control the timerfunction on a T
 
 <details>
 <summary><b>Details on JavaScript functionality</b></summary>
+<br>Embedded within the HTML file, the JavaScript handles the interaction logic:
 
-Embedded within the HTML file, the JavaScript handles the interaction logic:
-
-<b>Initialization and WebSocket Setup:</b>
+   <b>Initialization and WebSocket Setup:</b>
    <ul><li>The WebSocket connection is established with the server.
    </li><li>Functions to update the device status and handle WebSocket events are defined.
    </li></ul> 
@@ -63,19 +62,19 @@ The `index.js` file implements the server-side logic using Node.js, handling HTT
 <details>
 <summary><b>Server Setup and Configuration</b></summary>
 
-<b>Dependencies and Initialization:</b>
+<br><b>Dependencies and Initialization:</b>
    <ul><li>Requires essential modules: `http`, `fs`, `path`, `crypto`, and `url`.
    </li><li>Initializes server settings like hostname, port, and debug mode.
    </li><li>Defines utility functions for password hashing, input sanitization, and authentication.
    </li></ul>
 
-<b>Configuration File Loading:</b>
+<b>Configuration File Loading:</b><br>
 Reads and parses `config.json` and `settings.json` to load user credentials and device accounts.
 </details>
 
 <details>
 <summary><b>HTTP Server</b></summary>
-
+<br>
 <b>Server Creation:</b>
 Creates an HTTP server to listen for incoming requests.
 
