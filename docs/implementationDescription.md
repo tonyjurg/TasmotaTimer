@@ -115,4 +115,4 @@ One of the reasons for creation of this node.js app was to enhance security. For
 
 2. **Logs and Debugging**:
    - Enable debug mode in `config.json` to log detailed messages. This will append log messages to the specified logfile/
-   - Check the log file specified in `logFilePath` for error messages and operational logs. This can be done using `tail -f` on the node.js server, or alternatively, in any webbrowser when using the accompanying logviewer.
+   - Check the log file specified in `logFilePath` for error messages and operational logs. This can be done using `tail -f` on the node.js server.
