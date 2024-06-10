@@ -16,13 +16,13 @@ The `index.html` file is a web page designed to control the timerfunction on a T
 
 <br><b>Head Section:</b><br>
    <ul><li>Sets up meta tags for character set and viewport settings.
-   </li><li>Includes app title and links to an external CSS stylesheet for styling (`index.css`).
+   </li><li>Includes app title and links to an external CSS stylesheet for styling (<code>index.css</code>).
    </li></ul> 
    
 <b>Body Section:</b>
    <ul><li>Formats app including its title image (header.png).
-   </li><li>A `div` with the ID `controls` including a dropdown menu for selecting a device, a switch to toggle device power, Inputs for setting timer duration in hours and minutes and Buttons to set and clear timers.
-   </li><li>A `div` with the ID `log` displays the current timer status, last user action, and error messages when aplicable.
+   </li><li>A <code>div</code> with the ID <code>controls</code> including a dropdown menu for selecting a device, a switch to toggle device power, Inputs for setting timer duration in hours and minutes and Buttons to set and clear timers.
+   </li><li>A <code>div</code> with the ID <code>log</code> displays the current timer status, last user action, and error messages when aplicable.
      </li></ul> 
 </details>
 
@@ -36,17 +36,17 @@ The `index.html` file is a web page designed to control the timerfunction on a T
    </li></ul> 
    
 <b>Device Control Functions:</b>
-   <ul><li>`togglePower()`: Toggles the power state of the selected device and updates the status display.
-   </li><li>`setTimerWithDelta()`: Sets a timer based on user input for hours and minutes and enables timers on the device.
-   </li><li>`clearTimer()`: Clears any active timers on the device and updates the status display.
-   </li><li>`updateDeviceStatus()`: Fetches and displays the current power and timer status of the selected device.
-   </li><li>`deviceChanged()`: Updates the status display when a different device is selected.
+   <ul><li><code>togglePower()</code>: Toggles the power state of the selected device and updates the status display.
+   </li><li><code>setTimerWithDelta()</code>: Sets a timer based on user input for hours and minutes and enables timers on the device.
+   </li><li><code>clearTimer()</code>: Clears any active timers on the device and updates the status display.
+   </li><li><code>updateDeviceStatus()</code>: Fetches and displays the current power and timer status of the selected device.
+   </li><li><code>deviceChanged()</code>: Updates the status display when a different device is selected.
    </li></ul> 
 
 <b>Utility Functions:</b>
-   <ul><li>`getLocalTimeString()`: Returns the current local time as a formatted string.
-   </li><li>`getSelectedDevice()`: Retrieves the currently selected device from the dropdown menu.
-   </li><li>`sendCommand()`: Sends commands to the server to interact with the device, handling responses and errors appropriately.
+   <ul><li><code>getLocalTimeString()</code>: Returns the current local time as a formatted string.
+   </li><li><code>getSelectedDevice()</code>: Retrieves the currently selected device from the dropdown menu.
+   </li><li><code>sendCommand()</code>: Sends commands to the server to interact with the device, handling responses and errors appropriately.
    </li></ul> 
 
 <b>Event Listeners:</b>
@@ -57,7 +57,7 @@ The `index.html` file is a web page designed to control the timerfunction on a T
 
 # index.js
 
-The `index.js` file implements the server-side logic using Node.js, handling HTTP requests to interact with Tasmota devices. It reads configuration settings, manages user authentication, and serves static files and API endpoints. This part is executed at the server side.
+The <code>index.js</code> file implements the server-side logic using Node.js, handling HTTP requests to interact with Tasmota devices. It reads configuration settings, manages user authentication, and serves static files and API endpoints. This part is executed at the server side.
 
 <details>
 <summary><b>Server Setup and Configuration</b></summary>
