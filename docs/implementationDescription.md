@@ -114,5 +114,5 @@ One of the reasons for creation of this node.js app was to enhance security. For
    - **Device Communication**: Verify network settings and firewall rules allow the node.js server to communicate with the Tasmota device(s).
 
 2. **Logs and Debugging**:
-   - Enable debug mode in `config.json` to log detailed messages. This will append log messages to the specified logfile/
+   - Enable debug mode in `config.json` to log detailed messages. This will append log messages to the specified logfile.
    - Check the log file specified in `logFilePath` for error messages and operational logs. This can be done using `tail -f` on the node.js server.
