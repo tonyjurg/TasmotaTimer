@@ -4,7 +4,7 @@ The provided codebase consists of two primary files: `index.js` (running on the 
 
    - `config.json`: authentication details for the end user and log settings.
    - `settings.json`: authentication details for the Tasmota devices.
-   - 
+
 Together, these files create a web-based interface for using Tasmota-powered devices as a timer. The following description outlines the functionality and interactions between these files.
 
 # index.html
