@@ -12,7 +12,7 @@
 
 ## Configuration file
 - Configuration file to store server settings like client password and loging status: `config.json`.
-- Configuration file to store settings for Tasmota devices like friendly name, password and IP adress: `config.json`.
+- Configuration file to store settings for Tasmota devices like friendly name, password and IP adress: `settings.json`.
 
 ## Secure Authentication
 - Implemented in `index.js` using passwords stored in `config.json` outside public directory.
