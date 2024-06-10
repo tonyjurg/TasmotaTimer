@@ -15,10 +15,10 @@
 - Configuration file to store settings for Tasmota devices like friendly name, password and IP adress: `config.json`.
 
 ## Secure Authentication
-- Implemented in `index.js` using hashed passwords stored in `config.json`.
+- Implemented in `index.js` using passwords stored in `config.json` outside public directory.
 - Utilizes Basic Authentication for securing routes.
-- Decoupled user and device authentication for enhanced security.
-- Hides IP information about Tasmota for the end-user.
+- Decoupled user and device authentication for improved security.
+- Hides IP information of the Tasmota devices from the end-user.
 
 ## Subnet Support
 - End-users client can be on different subnet as node.js server bridges them.
