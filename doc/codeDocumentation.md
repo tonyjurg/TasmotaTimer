@@ -9,14 +9,14 @@ Together, these files create a web-based interface for using Tasmota-powered dev
 
 # index.html
 
-The `index.html` file is a web page designed to control the timerfunction on a Tasmota devices via a simple user interface. It contains several HTML elements, JavaScript functions, and CSS references to facilitate control and status monitoring of the Tasmota timer. This part is rendered and executed at the client side, to create a GUI and define actions for its control elements. The static file index.html together with the ascociated stylesheet (index.css) are served by a call to index.js. 
+The `index.html` file is a web page designed to control the timerfunction on a Tasmota devices via a simple user interface. It contains several HTML elements, JavaScript functions, and CSS references to facilitate control and status monitoring of the Tasmota timer. This part is rendered and executed at the client side, to create a GUI and define actions for its control elements. The static file index.html together with the ascociated stylesheet (`index.css`) are served by a call to index.js. 
 
 <details>
 <summary><b>Details on HTML Structure</b></summary>
 
 1. **Head Section**: 
    - Sets up meta tags for character set and viewport settings.
-   - Includes app title and links to an external CSS stylesheet for styling (index.css).
+   - Includes app title and links to an external CSS stylesheet for styling (`index.css`).
 
 2. **Body Section**:
    - Formats app including its title image (header.png).
