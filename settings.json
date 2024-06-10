@@ -1,0 +1,14 @@
+[
+  {
+     "deviceName": "Tasmota timer 1",
+     "deviceIP": "IP adres of Tasmota timer 1, e.g. 10.0.X.Y",
+     "username": "admin (default for Tasmota)",
+     "password": "password for Tasmota device 1 (user defined)"
+  },
+  {
+     "deviceName": "Tasmota timer 2",
+     "deviceIP": "IP adres of Tasmota timer 2, e.g. 10.0.X.Z",
+     "username": "admin (default for Tasmota)",
+     "password": "password for Tasmota device 1 (user defined)"
+  }
+]

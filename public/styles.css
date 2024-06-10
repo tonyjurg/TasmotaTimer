@@ -1,0 +1,133 @@
+/* file 'styles.css' (frontend implementation Tasmota Timer) */
+/* full code at https://github.com/tonyjurg/TasmotaTimer */
+/* version 0.1 (10 June 2024) */
+
+
+/* Style for the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-color: #f4f4f9;
+}
+/* Style for the main heading */
+h1 {
+    text-align: center;
+    font-size: 1.5em;
+}
+/* Style for the controls container */
+#controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* Style for labels */
+label {
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+/* Style for select, input, and button elements */
+select, input, button {
+    font-size: 1em;
+    margin: 5px;
+    padding: 10px;
+    width: 90%;
+    max-width: 300px;
+}
+/* Style for buttons */
+button {
+    cursor: pointer;
+}
+
+/* Additional margin for status displays */
+#statusDisplay, #timerStatus {
+    margin-top: 8px;
+}
+/* Style for the switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 10px;
+}
+/* Hide the default checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+/* Style for the slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+/* Style for the slider before element */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+/* Style for checked state */
+input:checked + .slider {
+    background-color: #2196F3;
+}
+/* Style for checked state before element */
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+/* Responsive styles */
+@media (min-width: 600px) {
+    #controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    select, input, button {
+        width: auto;
+        margin: 10px;
+    }
+}
+
+/* Style for compact input */
+.compact-input {
+    width: 40px;
+}
+
+/* Style for log area */
+#log {
+    white-space: pre-wrap;
+    background: #f4f4f4;
+    padding: 5px;
+    border: 1px solid #ccc;
+    height: 30vh;
+    overflow-y: scroll;
+
+}
+
+/* Style for error messages */
+#errorDisplay {
+    color: red;
+}
+
+/* CSS to center the image and resize it */
+.centered-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Tasmota Timer",
+  "version": "0.1",
+  "description": "This application provides an easy-to-use interface for setting and controlling timers on Tasmota-powered smart plugs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["Tasmota", "smart plugs", "timers", "IoT"],
+  "author": "Tony Jurg",
+  "license": "CC"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tonyjurg/TasmotaTimer.git"
+  },
+  "homepage": "https://tonyjurg.github.io/TasmotaTimer/",
+  "bugs": {
+    "url": "https://github.com/tonyjurg/TasmotaTimer/issues"
+  }
+}

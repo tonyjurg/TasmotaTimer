@@ -1,0 +1,10 @@
+{
+    "debug": false,
+    "logFilePath": "relative path to the file server.log",
+    "users": [
+        {
+            "username": "Username for the frontend app",
+            "password": "Password for the frontend app"
+        }
+    ]
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 
+file 'index.html' (frontend implementation Tasmota Timer)
+full code at https://github.com/tonyjurg/TasmotaTimer
+version 0.1 (10 June 2024)
+-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasmota Timer Control</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <img src="header.png" alt="Header Image" class="centered-image">
+    <div id="controls">
+         <select id="device" onchange="deviceChanged()">
+            <!-- Options will be populated dynamically -->
+        </select>
+        <label class="switch">
+            <input type="checkbox" id="powerSwitch" onchange="togglePower()">
+            <span class="slider"></span>
+        </label>
+        <span>
+            <input id="deltaHours" class="compact-input" type="number" value="0" placeholder="Hours" min="0" max="143" title="Enter hours">
+            <input id="deltaMinutes" class="compact-input" type="number" value="0" placeholder="Minutes" min="0" max="59" title="Enter minutes">
+            <button onclick="setTimerWithDelta()" style="width: 80px;">Set Timer</button>
+        </span>
+        <span>
+            <button onclick="clearTimer()">Clear Timer</button>
+        </span>
+    </div>
+    <div id="log">
+        <div id="timerStatus"></div>
+        <div>Last user action: <span id="statusDisplay"></span></div>
+        <div id="errorDisplay"></div>
+    </div>
+
+    <script>
+        // Get references to HTML elements
+        const logDiv = document.getElementById('log');
+        const deviceSelect = document.getElementById('device');
+        const powerSwitch = document.getElementById('powerSwitch');
+        const socket = new WebSocket(`ws://${location.host}`);
+
+        // Function to get long local time as a formatted string
+        function getLocalTimeString() {
+            const localDateTime = new Date();
+            return localDateTime.toISOString();
+        }
+
+        // Function to get short local time as a formatted string
+        function getLocalShortTimeString() {
+            const localDateTime = new Date();
+            return localDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // Function to get the currently selected device
+        function getSelectedDevice() {
+            return deviceSelect.value;
+        }
+
+        // Function to send a command to the server
+        async function sendCommand(path) {
+            const device = getSelectedDevice();
+            if (!device) {
+                console.error('Error: No device selected at ' + getLocalShortTimeString());
+                document.getElementById('errorDisplay').textContent = 'Error: No device selected at ' + getLocalShortTimeString();
+                return Promise.reject('No device selected');
+            }
+            const url = new URL(path, window.location.origin);
+            url.searchParams.set('device', device);
+            try {
+                const response = await fetch(url.toString());
+                if (!response.ok) {
+                    throw new Error('Server responded with an error!');
+                }
+                if (response.headers.get("Content-Type").includes("application/json")) {
+                    return response.json();
+                } else {
+                    throw new Error('Expected JSON, but got something else.');
+                }
+            } catch (error) {
+                console.error('Error: ' + error.message + ' at ' + getLocalShortTimeString());
+                throw error;
+            }
+        }
+
+        // Function to check if a device is reachable
+        async function checkDeviceReachability(device) {
+            const url = new URL('/getPowerStatus', window.location.origin);
+            url.searchParams.set('device', device);
+            try {
+                const response = await fetch(url.toString());
+                if (!response.ok) {
+                    throw new Error('Device not reachable');
+                }
+                const data = await response.json();
+                return data.POWER !== undefined;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // Function to toggle the power state of the device
+        async function togglePower() {
+            const state = powerSwitch.checked ? 'ON' : 'OFF';
+            try {
+                const data = await sendCommand(`/setPower?state=${state}`);
+                document.getElementById('statusDisplay').textContent = 'Switched power ' + data.POWER + ' at ' + getLocalShortTimeString();
+                updateDeviceStatus();
+                document.getElementById('errorDisplay').textContent = "";
+            } catch (error) {
+                document.getElementById('errorDisplay').textContent = 'Error: Could not update power status. Details: ' + error.message;
+            }
+        }
+
+        // Function to set a timer with the specified delta hours and minutes
+        async function setTimerWithDelta() {
+            const deltaHours = parseInt(document.getElementById('deltaHours').value || 0);
+            const deltaMinutes = parseInt(document.getElementById('deltaMinutes').value || 0);
+
+            if (deltaHours < 0 || deltaHours > 143 || deltaMinutes < 0 || deltaMinutes > 59 || deltaHours+deltaMinutes==0) {
+                alert('Please enter valid hours (0-143) and minutes (0-59) and a minimum of one minute.');
+                return;
+            }
+
+            try {
+                const response = await sendCommand(`/setTimer?hours=${deltaHours}&minutes=${deltaMinutes}&clienttime=${getLocalTimeString()}`);
+                await sendCommand('/enableTimers'); // Enable timers after setting the timer
+                updateDeviceStatus();
+                document.getElementById('statusDisplay').textContent = 'Enabled timer at ' + getLocalShortTimeString();
+                document.getElementById('errorDisplay').textContent = "";
+            } catch (error) {
+                document.getElementById('errorDisplay').textContent = 'Error: ' + error.message + ' at ' + getLocalShortTimeString();
+            }
+        }
+
+        // Function to clear the current timer
+        async function clearTimer() {
+            try {
+                await sendCommand('/clearTimer');
+                document.getElementById('timerStatus').innerHTML = 'Timer cleared';
+                document.getElementById('statusDisplay').textContent = 'Timer cleared at ' + getLocalShortTimeString();
+                document.getElementById('errorDisplay').textContent = '';
+                await sendCommand('/disableTimers'); // Disable timers after clearing the timer
+            } catch (error) {
+                document.getElementById('statusDisplay').textContent = 'Failed to clear timer at ' + getLocalShortTimeString();
+                document.getElementById('errorDisplay').textContent = 'Error: ' + error.message + ' at ' + getLocalShortTimeString();
+            }
+        }
+
+        // Function to update the status of the device (power and timer)
+        async function updateDeviceStatus() {
+            try {
+                const powerData = await sendCommand('/getPowerStatus');
+                if (powerData && powerData.POWER) {
+                    powerSwitch.checked = (powerData.POWER === 'ON');
+                }
+
+                const timerData = await sendCommand(`/getTimerStatus?clienttime=${encodeURIComponent(getLocalTimeString())}`);
+                if (timerData) {
+                    const timerStatusElem = document.getElementById('timerStatus');
+                    const [expiryInfo, durationInfo] = timerData.humanReadableTime.split('(');
+                    if (expiryInfo && durationInfo) {
+                        const expiryText = expiryInfo.trim();
+                        const durationText = durationInfo.replace('left)', 'left').trim();
+                        timerStatusElem.innerHTML = `Timer set to: ${expiryText}<br>${durationText}`;
+                    } else {
+                        timerStatusElem.textContent = 'Timer not set or expired';
+                    }
+                } else {
+                    document.getElementById('timerStatus').textContent = 'Timer not set or expired';
+                    document.getElementById('errorDisplay').textContent = "";
+                }
+            } catch (error) {
+                document.getElementById('errorDisplay').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        // Function to handle device selection change
+        async function deviceChanged() {
+            const device = getSelectedDevice();
+            const isReachable = await checkDeviceReachability(device);
+            if (!isReachable) {
+                alert(`The selected device (${device}) may be down.`);
+                document.getElementById('errorDisplay').textContent = `The selected device (${device}) may be down.`;
+            } else {
+                updateDeviceStatus();
+            }
+            document.getElementById('statusDisplay').textContent = 'Switched device at ' + getLocalShortTimeString();
+            document.getElementById('errorDisplay').textContent = "";
+        }
+
+        // Initialize the app and set up WebSocket connection
+        document.addEventListener('DOMContentLoaded', async function () {
+            document.getElementById('statusDisplay').textContent = 'Initiated app at ' + getLocalShortTimeString();
+
+            try {
+                const response = await fetch('/devices');
+                const devices = await response.json();
+                if (devices.length === 0) {
+                    document.getElementById('errorDisplay').textContent = 'Error: No devices available';
+                    return;
+                }
+                devices.forEach((device, index) => {
+                    const option = document.createElement('option');
+                    option.value = device.deviceName;
+                    option.textContent = device.deviceName;
+                    deviceSelect.appendChild(option);
+                    if (index === 0) {
+                        deviceSelect.selectedIndex = 0;
+                    }
+                });
+                updateDeviceStatus();
+                setInterval(updateDeviceStatus, 5000); // Update device status every five seconds
+            } catch (error) {
+                document.getElementById('errorDisplay').textContent = 'Error: Could not fetch devices: ' + error.message;
+            }
+
+            // WebSocket event handlers
+            socket.onmessage = (event) => {
+                console.log(event.data);
+            };
+
+            socket.onopen = () => {
+                console.log('WebSocket connection opened at ' + getLocalTimeString());
+            };
+
+            socket.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            socket.onclose = () => {
+                console.log('WebSocket connection closed');
+            };
+        });
+
+        // Expose functions to the global scope
+        window.togglePower = togglePower;
+        window.setTimerWithDelta = setTimerWithDelta;
+        window.clearTimer = clearTimer;
+        window.deviceChanged = deviceChanged;
+    </script>
+</body>
+</html>
