@@ -14,7 +14,7 @@ The `index.html` file is a web page designed to control the timerfunction on a T
 <details>
 <summary><b>Details on HTML Structure</b></summary>
 
-<b>1. Head Section:</b>
+<b>Head Section:</b>
    <ul><li>Sets up meta tags for character set and viewport settings.
    </li><li>Includes app title and links to an external CSS stylesheet for styling (`index.css`).
    </li></ul> 
@@ -31,12 +31,12 @@ The `index.html` file is a web page designed to control the timerfunction on a T
 
 Embedded within the HTML file, the JavaScript handles the interaction logic:
 
-<b>1. Initialization and WebSocket Setup:</b>
+<b>Initialization and WebSocket Setup:</b>
    <ul><li>The WebSocket connection is established with the server.
    </li><li>Functions to update the device status and handle WebSocket events are defined.
    </li></ul> 
    
-<b>2. Device Control Functions:</b>
+<b>Device Control Functions:</b>
    <ul><li>`togglePower()`: Toggles the power state of the selected device and updates the status display.
    </li><li>`setTimerWithDelta()`: Sets a timer based on user input for hours and minutes and enables timers on the device.
    </li><li>`clearTimer()`: Clears any active timers on the device and updates the status display.
@@ -44,13 +44,13 @@ Embedded within the HTML file, the JavaScript handles the interaction logic:
    </li><li>`deviceChanged()`: Updates the status display when a different device is selected.
    </li></ul> 
 
-<b>3. Utility Functions:</b>
+<b>Utility Functions:</b>
    <ul><li>`getLocalTimeString()`: Returns the current local time as a formatted string.
    </li><li>`getSelectedDevice()`: Retrieves the currently selected device from the dropdown menu.
    </li><li>`sendCommand()`: Sends commands to the server to interact with the device, handling responses and errors appropriately.
    </li></ul> 
 
-<b>4. Event Listeners:</b>
+<b>Event Listeners:</b>
    <ul><li>On page load, the list of devices is fetched from the server, and the first device is selected by default.
    </li><li>Periodic updates to device status are set to occur every minute.
    </li></ul> 
@@ -63,23 +63,23 @@ The `index.js` file implements the server-side logic using Node.js, handling HTT
 <details>
 <summary><b>Server Setup and Configuration</b></summary>
 
-<b>1. Dependencies and Initialization:</b>
+<b>Dependencies and Initialization:</b>
    <ul><li>Requires essential modules: `http`, `fs`, `path`, `crypto`, and `url`.
    </li><li>Initializes server settings like hostname, port, and debug mode.
    </li><li>Defines utility functions for password hashing, input sanitization, and authentication.
    </li></ul>
 
-<b>2. Configuration File Loading:</b>
+<b>Configuration File Loading:</b>
 Reads and parses `config.json` and `settings.json` to load user credentials and device accounts.
 </details>
 
 <details>
 <summary><b>HTTP Server</b></summary>
 
-1. **Server Creation**:
+<b>Server Creation:</b>
 Creates an HTTP server to listen for incoming requests.
 
-2. **Request Handling**:
+<b>Request Handling:</b>
 Handles different routes based on the request URL:
      <ul><li>`POST /login`: Authenticates users using credentials from the request body.
      </li><li>Serves static files (`index.html`, `styles.css`, `favicon.ico`, and `header.png`).
@@ -87,7 +87,7 @@ Handles different routes based on the request URL:
      </li><li>The following device-specific routes are defined (`/setPower`, `/getTime`, `/setTimer`, `/clearTimer`, `/getTimerStatus`, `/getPowerStatus`, `/enableTimers`, `/disableTimers`).
      </li></ul>
 
-3. **Command Execution**:
+<b>Command Execution:</b>
  Defines functions to handle device commands:
      <ul><li>`handleSetPower()`: Sets the power state of a device.
      </li><li>`handleSetTimer()`: Sets a timer on a device.
@@ -96,7 +96,7 @@ Handles different routes based on the request URL:
      </li><li>`handleEnableTimers()`, `handleDisableTimers()`: Enables or disables timers on a device.
      </li></ul>
 
-4. **Utility Functions**:
+<b>Utility Functions:</b>
    <ul><li>`isAuthorized()`: Checks if a request contains valid authentication credentials.
    </li><li>`serveStaticFile()`: Serves static files from the server's public directory.
    </li><li>`logMessage()`: Logs messages to a file if debug mode is enabled.
