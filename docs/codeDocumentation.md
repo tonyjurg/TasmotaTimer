@@ -68,17 +68,17 @@ The <code>index.js</code> file implements the server-side logic using Node.js, h
    </li><li>Defines utility functions for password hashing, input sanitization, and authentication.
    </li></ul>
 
-<b>Configuration File Loading:</b><br>
+<b>Configuration File Loading:</b><br><br>
 Reads and parses <code>config.json</code> and <code>settings.json</code> to load user credentials and device accounts.<br>
 </details>
 
 <details>
 <summary><b>HTTP Server</b></summary>
 <br>
-<b>Server Creation:</b><br>
-Creates an HTTP server to listen for incoming requests.
+<b>Server Creation:</b><br><br>
+Creates an HTTP server to listen for incoming requests.<br>
 
-<b>Request Handling:</b><br>
+<b>Request Handling:</b><br><br>
 Handles different routes based on the request URL:
      <ul><li><code>POST /login</code>: Authenticates users using credentials from the request body.
      </li><li>Serves static files (<code>index.html</code>, <code>styles.css</code>, <code>favicon.ico</code>, and <code>header.png</code>).
