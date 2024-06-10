@@ -100,10 +100,10 @@ One of the reasons for creation of this node.js app was to enhance security. For
 2. **Decoupled Authentication**:
    - User authentication is managed by the Node.js server.
    - Device authentication is handled separately using credentials stored in `settings.json`.
-   - This separation enhances security by ensuring user credentials are not directly used for device access.
+   - This separation enhances security by ensuring that the enduse does not need to use the Tasmota credentials or directly connects to the Tasmota devices.
 
-3. **Secure Communication**:
-   - Implement HTTPS on the Node.js server to encrypt data between the user interface and server.
+3. **Security of Communication**:
+   - Basic authentication is being used.
    - Use strong passwords and change them regularly for both users and the Tasmota devices.
 
 #### Troubleshooting
