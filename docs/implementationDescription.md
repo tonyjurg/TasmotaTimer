@@ -1,4 +1,4 @@
-### Implementation of the Tasmota Timer
+### Deploying the Tasmota Timer
 
 #### Overview
 
@@ -105,21 +105,6 @@ One of the reasons for creation of this node.js app was to enhance security. For
 3. **Secure Communication**:
    - Implement HTTPS on the Node.js server to encrypt data between the user interface and server.
    - Use strong passwords and change them regularly for both users and the Tasmota devices.
-
-#### Key Functions and Logic
-
-1. **User Authentication**:
-   - Implemented in `index.js` using hashed passwords stored in `config.json`.
-   - Utilizes Basic Authentication for securing routes.
-
-2. **Device Commands**:
-   - Commands to control Tasmota devices are sent via HTTP requests.
-   - Functions such as `togglePower`, `setTimerWithDelta`, and `clearTimer` in `index.html` manage user interactions.
-   - Corresponding handlers in `index.js` (`handleSetPower`, `handleSetTimer`, etc.) execute the commands on devices.
-
-3. **Real-Time Updates**:
-   - The web interface uses JavaScript to periodically update device status.
-   - WebSocket connection established in `index.html` for real-time communication and status updates.
 
 #### Troubleshooting
 
