@@ -1,4 +1,4 @@
-# Features
+# Tasmota Timer Features
 
 ## User-Friendly Interface
 - Simple and intuitive web interface for controlling timers on Tasmota-powered smart plugs.
