@@ -29,8 +29,8 @@ The `index.html` file is a web page designed to control the timerfunction on a T
 <details>
 <summary><b>Details on JavaScript functionality</b></summary>
 <br>Embedded within the HTML file, the JavaScript handles the interaction logic:
-
-   <b>Initialization and WebSocket Setup:</b>
+   
+<br><b>Initialization and WebSocket Setup:</b>
    <ul><li>The WebSocket connection is established with the server.
    </li><li>Functions to update the device status and handle WebSocket events are defined.
    </li></ul> 
@@ -63,51 +63,51 @@ The <code>index.js</code> file implements the server-side logic using Node.js, h
 <summary><b>Server Setup and Configuration</b></summary>
 
 <br><b>Dependencies and Initialization:</b>
-   <ul><li>Requires essential modules: `http`, `fs`, `path`, `crypto`, and `url`.
+   <ul><li>Requires essential modules: <code>http</code>, <code>fs</code>, <code>path</code>, <code>crypto</code>, and <code>url</code>.
    </li><li>Initializes server settings like hostname, port, and debug mode.
    </li><li>Defines utility functions for password hashing, input sanitization, and authentication.
    </li></ul>
 
 <b>Configuration File Loading:</b><br>
-Reads and parses `config.json` and `settings.json` to load user credentials and device accounts.
+Reads and parses <code>config.json</code> and <code>settings.json</code> to load user credentials and device accounts.<br>
 </details>
 
 <details>
 <summary><b>HTTP Server</b></summary>
 <br>
-<b>Server Creation:</b>
+<b>Server Creation:</b><br>
 Creates an HTTP server to listen for incoming requests.
 
-<b>Request Handling:</b>
+<b>Request Handling:</b><br>
 Handles different routes based on the request URL:
-     <ul><li>`POST /login`: Authenticates users using credentials from the request body.
-     </li><li>Serves static files (`index.html`, `styles.css`, `favicon.ico`, and `header.png`).
-     </li><li>`GET /devices`: Returns a list of available devices.
-     </li><li>The following device-specific routes are defined (`/setPower`, `/getTime`, `/setTimer`, `/clearTimer`, `/getTimerStatus`, `/getPowerStatus`, `/enableTimers`, `/disableTimers`).
+     <ul><li><code>POST /login</code>: Authenticates users using credentials from the request body.
+     </li><li>Serves static files (<code>index.html</code>, <code>styles.css</code>, <code>favicon.ico</code>, and <code>header.png</code>).
+     </li><li><code>GET /devices</code>: Returns a list of available Tasmota devices defined in <code>settings.json</code>.
+     </li><li>The following device-specific routes are defined (<code>/setPower</code>, <code>/getTime</code>, <code>/setTimer</code>, <code>/clearTimer</code>, <code>/getTimerStatus</code>, <code>/getPowerStatus</code>, <code>/enableTimers</code>, <code>/disableTimers</code>).
      </li></ul>
 
 <b>Command Execution:</b>
  Defines functions to handle device commands:
-     <ul><li>`handleSetPower()`: Sets the power state of a device.
-     </li><li>`handleSetTimer()`: Sets a timer on a device.
-     </li><li>`handleClearTimer()`: Clears a timer on a device.
-     </li><li>`handleGetTimerStatus()`, `handleGetPowerStatus()`, `handleGetTime()`: Fetches current status information from the device.
-     </li><li>`handleEnableTimers()`, `handleDisableTimers()`: Enables or disables timers on a device.
+     <ul><li><code>handleSetPower()</code>: Sets the power state of a device.
+     </li><li><code>handleSetTimer()</code>: Sets a timer on a device.
+     </li><li><code>handleClearTimer()</code>: Clears a timer on a device.
+     </li><li><code>handleGetTimerStatus()</code>, <code>handleGetPowerStatus()</code> <code>handleGetTime()</code>: Fetches current status information from the device for timer, switchstatus and time.
+     </li><li><code>handleEnableTimers()</code>, <code>handleDisableTimers()</code> Enables or disables timers on a device.
      </li></ul>
 
 <b>Utility Functions:</b>
-   <ul><li>`isAuthorized()`: Checks if a request contains valid authentication credentials.
-   </li><li>`serveStaticFile()`: Serves static files from the server's public directory.
-   </li><li>`logMessage()`: Logs messages to a file if debug mode is enabled.
-   </li><li>`getRequestOptions()`: Prepares HTTP request options for sending commands to Tasmota devices.
-   </li><li>`makeRequest()`: Makes HTTP requests to Tasmota devices and processes responses.
-   </li><li>`getCurrentDeviceTime()`: Get the current time from the Tasmota device.
-   </li><li>`sanitizeInput()`: Sanitize input to prevent XSS attacks.
+   <ul><li><code>isAuthorized()</code>: Checks if a request contains valid authentication credentials.
+   </li><li><code>serveStaticFile()</code>: Serves static files from the server's public directory.
+   </li><li><code>logMessage()</code>: Logs messages to a file if debug mode is enabled.
+   </li><li><code>getRequestOptions()</code>: Prepares HTTP request options for sending commands to Tasmota devices.
+   </li><li><code>makeRequest()</code>: Makes HTTP requests to Tasmota devices and processes responses.
+   </li><li><code>getCurrentDeviceTime()</code>: Get the current time from the Tasmota device.
+   </li><li><code>sanitizeInput()</code>: Sanitize input to prevent XSS attacks.
    </li></ul>
 </details>
 
 ## Logging and Debugging
 
-The server logs client actions and errors to a log file if debug mode is enabled (by setting 'debug' to 'true' in `config.json`, providing traceability and aiding in debugging issues. Please be aware that there is no mechanism implemented to manage the logfiles. Logging is only to be switched on to allow for investigation or for development purposes.  
+The server logs client actions and errors to a log file if debug mode is enabled (by setting 'debug' to 'true' in <code>config.json</code>, providing traceability and aiding in debugging issues. Please be aware that there is no mechanism implemented to manage the logfiles. Logging is only to be switched on to allow for investigation or for development purposes (in order to prevent filesystem overflow).  
 
 
