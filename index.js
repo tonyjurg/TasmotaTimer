@@ -1,11 +1,11 @@
 // file 'index.js' (backend implementation Tasmota Timer)
 // full code at https://github.com/tonyjurg/TasmotaTimer
-// version 0.1 (10 June 2024)
+// version 0.2 (27 June 2024)
 
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 const url = require('url');
 
 const hostname = '0.0.0.0';
@@ -17,23 +17,27 @@ let users = [];
 let accounts = [];
 
 /**
- * Hash a password using SHA-256.
+ * Hash a password using bcrypt.
  * @param {string} password - The password to hash.
- * @returns {string} The hashed password.
+ * @returns {Promise<string>} The hashed password.
  */
-function hashPassword(password) {
-    return crypto.createHash('sha256').update(password).digest('hex');
+async function hashPassword(password) {
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds);
 }
 
 /**
  * Authenticate a user with a username and password.
  * @param {string} username - The username of the user.
  * @param {string} password - The password of the user.
- * @returns {boolean} True if authentication is successful, otherwise false.
+ * @returns {Promise<boolean>} True if authentication is successful, otherwise false.
  */
-function authenticate(username, password) {
-    const user = users.find(u => u.username === username && u.password === hashPassword(password));
-    return user !== undefined;
+async function authenticate(username, password) {
+    const user = users.find(u => u.username === username);
+    if (user && typeof password === 'string' && typeof user.password === 'string') {
+        return await bcrypt.compare(password, user.password);
+    }
+    return false;
 }
 
 /**
