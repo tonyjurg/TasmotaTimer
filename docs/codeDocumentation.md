@@ -11,14 +11,16 @@ Together, these files create a web-based interface for using Tasmota-powered dev
 
 The `index.html` file is a web page designed to control the timerfunction on a Tasmota devices via a simple user interface. It contains several HTML elements, JavaScript functions, and CSS references to facilitate control and status monitoring of the Tasmota timer. This part is rendered and executed at the client side, to create a GUI and define actions for its control elements. The static file index.html together with the ascociated stylesheet (`index.css`) are served by a call to index.js. 
 
-##Details on HTML Structure
+## Details on HTML Structure
 
 *Head Section:*
+
    <ul><li>Sets up meta tags for character set and viewport settings.
    </li><li>Includes app title and links to an external CSS stylesheet for styling (<code>index.css</code>).
    </li></ul> 
    
 *Body Section:*
+
    <ul><li>Formats app including its title image (header.png).
    </li><li>A <code>div</code> with the ID <code>controls</code> including a dropdown menu for selecting a device, a switch to toggle device power, Inputs for setting timer duration in hours and minutes and Buttons to set and clear timers.
    </li><li>A <code>div</code> with the ID <code>log</code> displays the current timer status, last user action, and error messages when aplicable.
@@ -27,11 +29,13 @@ The `index.html` file is a web page designed to control the timerfunction on a T
 Embedded within the HTML file, the JavaScript handles the interaction using the following logic:
    
 *Initialization and WebSocket Setup:*
+
    <ul><li>The WebSocket connection is established with the server.
    </li><li>Functions to update the device status and handle WebSocket events are defined.
    </li></ul> 
    
 *Device Control Functions:*
+
    <ul><li><code>togglePower()</code>: Toggles the power state of the selected device and updates the status display.
    </li><li><code>setTimerWithDelta()</code>: Sets a timer based on user input for hours and minutes and enables timers on the device.
    </li><li><code>clearTimer()</code>: Clears any active timers on the device and updates the status display.
@@ -40,12 +44,14 @@ Embedded within the HTML file, the JavaScript handles the interaction using the 
    </li></ul> 
 
 *Utility Functions:*
+
    <ul><li><code>getLocalTimeString()</code>: Returns the current local time as a formatted string.
    </li><li><code>getSelectedDevice()</code>: Retrieves the currently selected device from the dropdown menu.
    </li><li><code>sendCommand()</code>: Sends commands to the server to interact with the device, handling responses and errors appropriately.
    </li></ul> 
 
 *Event Listeners:*
+
    <ul><li>On page load, the list of devices is fetched from the server, and the first device is selected by default.
    </li><li>Periodic updates to device status are set to occur every minute.
    </li></ul> 
@@ -77,6 +83,7 @@ Creates an HTTP server to listen for incoming requests.<br>
 *Request Handling:*
 
 Handles different routes based on the request URL:
+
      <ul><li><code>POST /login</code>: Authenticates users using credentials from the request body.
      </li><li>Serves static files (<code>index.html</code>, <code>styles.css</code>, <code>favicon.ico</code>, and <code>header.png</code>).
      </li><li><code>GET /devices</code>: Returns a list of available Tasmota devices defined in <code>settings.json</code>.
@@ -86,6 +93,7 @@ Handles different routes based on the request URL:
 *Command Execution:* 
 
  Defines functions to handle device commands:
+ 
      <ul><li><code>handleSetPower()</code>: Sets the power state of a device.
      </li><li><code>handleSetTimer()</code>: Sets a timer on a device.
      </li><li><code>handleClearTimer()</code>: Clears a timer on a device.
