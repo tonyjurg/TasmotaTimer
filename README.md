@@ -1,4 +1,6 @@
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_NC-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) 
+[![Docs](https://img.shields.io/badge/docs-%F0%9F%93%96-success.svg)](https://tonyjurg.github.io/TasmotaTimer/) 
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_NC-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 # Tasmota Timer
 
