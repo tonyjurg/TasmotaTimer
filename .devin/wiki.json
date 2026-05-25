@@ -1,0 +1,222 @@
+{
+  "repo_notes": [
+    {
+      "content": ""
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "High-level introduction to TasmotaTimer: what it does, why it exists, its architecture, licensing, and how to navigate the wiki.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Project Purpose and Key Features",
+      "purpose": "Explains the problem TasmotaTimer solves (secure, cross-subnet timer management for Tasmota smart plugs), its key features (decoupled auth, subnet bridging, logging, multi-device support), and the CC-BY-NC 4.0 license.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "System Architecture Overview",
+      "purpose": "Describes the three-tier architecture (browser client → Node.js middleware → Tasmota hardware), the network topology (User LAN / IoT VLAN), and the data flow from user action to device command.",
+      "parent": "Overview",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Backend Server",
+      "purpose": "Overview of the Node.js backend (index.js), linking to child pages covering the API, timer logic, security, and logging subsystems.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "HTTP API Endpoints",
+      "purpose": "Reference for every REST-like endpoint exposed by index.js: /login, /devices, /setPower, /getPowerStatus, /setTimer, /clearTimer, /getTimerStatus, /enableTimers, /disableTimers, /getTime. Covers request parameters, response shapes, and routing logic.",
+      "parent": "Backend Server",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Timer Logic and Time Synchronization",
+      "purpose": "Deep dive into handleSetTimer and handleGetTimerStatus: how the server queries the Tasmota device clock (getCurrentDeviceTime), calculates timeDeltaMinutes to compensate for NTP drift, builds the Timer1 JSON payload with the dowMap bitmask, and formats humanReadableTime for the client.",
+      "parent": "Backend Server",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Authentication and Security",
+      "purpose": "Covers the two-layer security model: user authentication via bcrypt-hashed credentials in config.json (isAuthorized, authenticate, hashPassword), device authentication via Basic Auth headers built by getRequestOptions, input sanitization (sanitizeInput), and the network isolation strategy.",
+      "parent": "Backend Server",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Logging and Debugging",
+      "purpose": "Explains the logMessage function, the debug flag in config.json, the logFilePath setting, log symbol conventions (!! == <= =>), and guidance on using tail -f for live monitoring. Notes the lack of log rotation and the filesystem overflow risk.",
+      "parent": "Backend Server",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Frontend Web Interface",
+      "purpose": "Overview of the browser-side application (public/index.html + styles.css), linking to child pages on UI components and the client-server communication layer.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "UI Components and Layout",
+      "purpose": "Describes every visible element in index.html: the device selector dropdown, the power toggle slider (.switch/.slider), the deltaHours/deltaMinutes inputs, Set Timer and Clear Timer buttons, the timerStatus/statusDisplay/errorDisplay divs, and the header.png banner. Covers styles.css responsive layout rules.",
+      "parent": "Frontend Web Interface",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Client-Side Logic and API Communication",
+      "purpose": "Explains the JavaScript functions in index.html: initialization lifecycle (DOMContentLoaded), sendCommand, checkDeviceReachability, togglePower, setTimerWithDelta, clearTimer, updateDeviceStatus, deviceChanged, getLocalTimeString, and the 5-second polling interval. Also covers the WebSocket connection setup and its current role.",
+      "parent": "Frontend Web Interface",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Configuration and Deployment",
+      "purpose": "Overview of how to configure and deploy TasmotaTimer, linking to child pages on configuration files and step-by-step deployment.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Configuration Files Reference",
+      "purpose": "Full reference for config.json (debug, logFilePath, users array with username/password) and settings.json (devices array with deviceName, deviceIP, username, password). Includes annotated example values and explains which fields require a server restart to take effect.",
+      "parent": "Configuration and Deployment",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Installation and Deployment Guide",
+      "purpose": "Step-by-step instructions: prerequisites (Node.js, npm, bcrypt), directory structure setup (root files vs. public/ subdirectory), npm install, starting the server with node index.js, accessing the web interface at http://<host>:3000, and notes on running as a persistent service on a NAS (e.g., Synology).",
+      "parent": "Configuration and Deployment",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Network Topology and Security Hardening",
+      "purpose": "Guidance on placing the Node.js server as a subnet bridge between the User LAN and IoT VLAN, configuring firewall rules to restrict Tasmota device access to the server IP only, using strong passwords, and the limitations of Basic Authentication over HTTP.",
+      "parent": "Configuration and Deployment",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Documentation Site",
+      "purpose": "Overview of the GitHub Pages documentation infrastructure, linking to child pages on Jekyll configuration and custom HTML includes.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Jekyll Configuration and GitHub Pages Setup",
+      "purpose": "Explains docs/_config.yml: the midnight remote theme (pages-themes/midnight@v0.2.0), jekyll-remote-theme plugin, jekyll-sitemap plugin, and how the build pipeline generates the hosted site at tonyjurg.github.io/TasmotaTimer/.",
+      "parent": "Documentation Site",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Custom Head Includes and Analytics",
+      "purpose": "Covers docs/_includes/head-custom.html: Google Site Verification meta tag, the head-custom-theme-colors.html and head-custom-google-analytics.html sub-includes, the commented favicon path using relative_url, and how Jekyll's include system allows theme extension without modifying upstream layouts.",
+      "parent": "Documentation Site",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Contributing and Issue Reporting",
+      "purpose": "Explains how to contribute to TasmotaTimer, covering the GitHub issue templates for bug reports, documentation updates, and feature requests.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Bug Report Template",
+      "purpose": "Documents the bug_report.md issue template: required fields (description, reproduction steps, expected behavior, environment metadata for Desktop and Smartphone), label conventions, and the defect lifecycle from identification through contextualization.",
+      "parent": "Contributing and Issue Reporting",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Documentation Update and Feature Request Templates",
+      "purpose": "Documents the documentation-update.md template (part of docs, suggested changes, justification) and the feature_request.md template, explaining how to submit improvement proposals and what information maintainers need.",
+      "parent": "Contributing and Issue Reporting",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    },
+    {
+      "title": "Glossary",
+      "purpose": "Definitions of all codebase-specific terms, Tasmota concepts, abbreviations, and domain jargon that an onboarding engineer needs to understand TasmotaTimer.",
+      "page_notes": [
+        {
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
